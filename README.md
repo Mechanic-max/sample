@@ -1,2 +1,2 @@
 # sample
-this is just a ssample repo made by MrMechanic
+this is just a sample repo made by MrMechanic
