@@ -133,6 +133,7 @@ class Cni():
 
                 province_of_birth = resp.xpath("normalize-space((//td[contains(text(),'nato a:')])[1]/following-sibling::td/text())").extract_first()
                 fiscal_code = resp.xpath("normalize-space((//td[contains(text(),'codice fiscale:')])[1]/following-sibling::td/text())").extract_first()
+         
                 address = resp.xpath("normalize-space((//td[contains(text(),'residenza/domicilio professionale:')])[1]/following-sibling::td/text())").extract_first()
                 order_engineer = resp.xpath("normalize-space((//td[contains(text(),'ordine ingegneri:')])[1]/following-sibling::td/text())").extract_first()
                 first_order_engineer = resp.xpath("normalize-space((//td[contains(text(),'prima iscrizione Ordine di:')])[1]/following-sibling::td/text())").extract_first()
@@ -175,46 +176,48 @@ class Cni():
                 location= ''
                 phone= ''
                 fax= ''
-
-                print()
-                print("title:",title)
-                print("surname:",surname)
-                print("f_name:",f_name)
-                print("reg_no:",reg_no)
-                print("reg_date:",reg_date)
-                print("first_reg_date:",first_reg_date)
-                print("dob:",dob)
-                print("order_engineer:",order_engineer)
-                print("first_order_engineer:",first_order_engineer)
-                print("university:",university)
-                print("sessions:",sessions)
-                print("main_activicty:",main_activicty)
-                print("disciplinary_measures:",disciplinary_measures)
-                print("Formation:",Formation)
-                print("insurance:",insurance)
-                print("Personal_data_provided_by_the_member:",Personal_data_provided_by_the_member)
-                print("suspended_from:",suspended_from)
-                print("suspended_at:",suspended_at)
-                print("province_of_birth:",province_of_birth)
-                print("place_of_birth:",place_of_birth)
-                print("sex:",sex)
-                print("fiscal_code:",fiscal_code)
-                print("vat_no:",vat_no)
-                print("qualifying_title:",qualifying_title)
-                print("year_of_qualifying:",year_of_qualifying)
-                print("pec:",pec)
-                print("email:",email)
-                print("cell_phone:",cell_phone)
-                print("website:",website)
-                print("serial_number:",serial_number)
-                print("address:",address)
-                print("postal_code:",postal_code)
-                print("province:",province)
-                print("location:",location)
-                print("phone:",phone)
-                print("fax:",fax)
-                print("url:",link)
-                print()
+                try:
+                    print()
+                    print("title:",title)
+                    print("surname:",surname)
+                    print("f_name:",f_name)
+                    print("reg_no:",reg_no)
+                    print("reg_date:",reg_date)
+                    print("first_reg_date:",first_reg_date)
+                    print("dob:",dob)
+                    print("order_engineer:",order_engineer)
+                    print("first_order_engineer:",first_order_engineer)
+                    print("university:",university)
+                    print("sessions:",sessions)
+                    print("main_activicty:",main_activicty)
+                    print("disciplinary_measures:",disciplinary_measures)
+                    print("Formation:",Formation)
+                    print("insurance:",insurance)
+                    print("Personal_data_provided_by_the_member:",Personal_data_provided_by_the_member)
+                    print("suspended_from:",suspended_from)
+                    print("suspended_at:",suspended_at)
+                    print("province_of_birth:",province_of_birth)
+                    print("place_of_birth:",place_of_birth)
+                    print("sex:",sex)
+                    print("fiscal_code:",fiscal_code)
+                    print("vat_no:",vat_no)
+                    print("qualifying_title:",qualifying_title)
+                    print("year_of_qualifying:",year_of_qualifying)
+                    print("pec:",pec)
+                    print("email:",email)
+                    print("cell_phone:",cell_phone)
+                    print("website:",website)
+                    print("serial_number:",serial_number)
+                    print("address:",address)
+                    print("postal_code:",postal_code)
+                    print("province:",province)
+                    print("location:",location)
+                    print("phone:",phone)
+                    print("fax:",fax)
+                    print("url:",link)
+                    print()
+                except:
+                    None
                 
             
                 # with open("Dataset_sample.csv",'a',newline='',encoding='utf-8') as file:
@@ -235,6 +238,8 @@ class Cni():
                 mydb.commit()
                 print(mycursor.rowcount, "record inserted.")   
 
+    def close(self):
+        self.driver.close()
 if __name__ == '__main__':
     url = "https://www.cni.it/albo-unico"
     scraper = Cni()
@@ -246,3 +251,5 @@ if __name__ == '__main__':
         os.remove("cni_links.csv")
     except:
         None
+
+    scraper.close()
